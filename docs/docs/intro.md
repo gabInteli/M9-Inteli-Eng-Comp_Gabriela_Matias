@@ -2,34 +2,21 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Introdução
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Bem-vindo ao meu repositório de atividades individuais ! 
 
-## Getting Started
+![Welcome](https://defeatzone.com/wp-content/uploads/2023/09/Jujutsu-Kaisen-5-Curiosidades-que-voce-Precisa-saber-sobre-Satoru-Gojo-1600x960.webp)
 
-Get started by **creating a new site**.
+Neste espaço, compartilho o meu aprendizado e desenvolvimento em temas como MQTT, Redes e Network, comunicação de Dispositivos, IoT e Cloud. 
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Sobre o Repositório
 
-## Generate a new site
+Este repositório foi criado para documentar e versionar projetos relacionados a atividades práticas, experimentos e estudos pessoais. 
+Cada uma tarefa desenvolvida para temas referentes ao módulo 8 de Engenharia da Computação, proporcionando uma visão organizada e acessível ao meu progresso e aprendizado.
 
-Generate a new Docusaurus site using the **classic template**:
+## Como Utilizar Este Repositório
 
-```shell
-npx @docusaurus/init@latest init my-website classic
-```
-
-## Start your site
-
-Run the development server:
-
-```shell
-cd my-website
-
-npx docusaurus start
-```
-
-Your site starts at `http://localhost:3000`.
-
-Open `docs/intro.md` and edit some lines: the site **reloads automatically** and display your changes.
+1. **Clonar o Repositório:**
+   ```bash
+   git clone https://github.com/gabInteli/M9-Inteli-Eng-Comp_Gabriela_Matias.git
