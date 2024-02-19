@@ -1,13 +1,16 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+const organizationName = 'gabInteli'; // Usually your GitHub org/user name.
+const projectName = 'M9-Inteli-Eng-Comp_Gabriela_Matias'; // Usually your repo name.
+
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
   title: 'Gabriela Rodrigues Matias',
   tagline: 'Repositório de Estudos Individuais',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: `https://${organizationName}.github.io`,
+  baseUrl: `/${projectName}/`,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
