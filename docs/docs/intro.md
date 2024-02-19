@@ -10,6 +10,7 @@ Bem-vindo ao meu repositório de atividades individuais !
 
 Neste espaço, compartilho o meu aprendizado e desenvolvimento em temas como MQTT, Redes e Network, comunicação de Dispositivos, IoT e Cloud. 
 
+
 ## Sobre o Repositório
 
 Este repositório foi criado para documentar e versionar projetos relacionados a atividades práticas, experimentos e estudos pessoais. 
