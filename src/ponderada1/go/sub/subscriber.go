@@ -10,7 +10,7 @@ var messagePubHandler MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Me
 }
 
 func main() {
-	opts := MQTT.NewClientOptions().AddBroker("tcp://broker:1891")
+	opts := MQTT.NewClientOptions().AddBroker("tcp://localhost:1891")
 	opts.SetClientID("subscriber")
 	opts.SetDefaultPublishHandler(messagePubHandler)
 
