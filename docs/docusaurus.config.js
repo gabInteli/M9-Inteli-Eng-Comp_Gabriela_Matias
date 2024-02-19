@@ -13,8 +13,6 @@ const projectName = 'M9-Inteli-Eng-Comp_Gabriela_Matias'; // Usually your repo n
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
 
   presets: [
     [
