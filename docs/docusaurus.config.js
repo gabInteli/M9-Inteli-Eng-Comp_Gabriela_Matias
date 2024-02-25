@@ -7,8 +7,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 (module.exports = {
   title: 'Gabriela Rodrigues Matias',
   tagline: 'Repositório de Estudos Individuais',
-  url: "https://gabinteli.github.io/M9-Inteli-Eng-Comp_Gabriela_Matias/",
-  baseUrl: './',
+  url: "https://gabinteli.github.io",
+  baseUrl: '/M9-Inteli-Eng-Comp_Gabriela_Matias/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
