@@ -64,3 +64,86 @@ Isso iniciará o script que receberá as mensagens JSON simuladas para o tópico
 
 ![Subscriber](../../static/img/sub_pond4.png)
 
+### Rodando os Testes
+
+Acesse o diretório: 
+```
+/src/ponderada2/src/pub
+```
+
+Rode o comando: 
+```
+go test -v
+```
+
+Resultado esperado: 
+
+```
+❯ go test -v
+=== RUN   TestConnectToMQTTBroker
+Connected
+    pub_test.go:29: Conexão com o broker MQTT estabelecida com sucesso.
+--- PASS: TestConnectToMQTTBroker (2.19s)
+=== RUN   TestGenerateData
+    pub_test.go:45: Dados gerados validados com sucesso.
+--- PASS: TestGenerateData (0.00s)
+=== RUN   TestPublishAndReceiveMessages
+Connected
+Connection lost: EOF    pub_test.go:109: Mensagem recebida com sucesso.
+--- PASS: TestPublishAndReceiveMessages (2.92s)
+PASS
+ok      paho-go 5.117s
+```
+
+______________________________________________________________________________________________
+
+## Teste de Conexão com o Broker MQTT
+
+### Propósito:
+Este teste verifica se é possível estabelecer uma conexão com o broker MQTT especificado.
+
+### Entrada:
+- Nenhuma entrada explícita.
+
+### Saída Esperada:
+- Conexão bem-sucedida com o broker MQTT.
+
+## Teste de Geração de Dados
+
+### Propósito:
+Este teste verifica se os dados gerados pela função `GenerateData` estão completos e contêm todos os campos esperados.
+
+### Entrada:
+- Nenhuma entrada explícita.
+
+### Saída Esperada:
+- Mapa contendo os seguintes campos:
+  - CO2: Concentração de CO2.
+  - CO: Concentração de CO.
+  - NO2: Concentração de NO2.
+  - MP10: Concentração de partículas MP10.
+  - MP2,5: Concentração de partículas MP2,5.
+
+## Teste de Publicação e Recebimento de Mensagens MQTT
+
+### Propósito:
+Este teste simula o processo de publicação e recebimento de mensagens MQTT.
+
+### Entrada:
+- Mensagem JSON contendo dados de sensores gerados aleatoriamente.
+
+### Saída Esperada:
+- Mensagem JSON recebida com sucesso, contendo os mesmos campos e valores da mensagem publicada.
+
+### Passos do Teste:
+1. Publicar uma mensagem MQTT contendo dados de sensores gerados aleatoriamente.
+2. Aguardar a recebimento da mensagem publicada no tópico MQTT especificado.
+3. Verificar se a mensagem recebida contém todos os campos esperados e se os valores estão dentro dos limites esperados.
+4. Reportar um erro se a mensagem não for recebida dentro do tempo limite especificado.
+
+Para cada teste, são fornecidas explicações detalhadas sobre o que o teste faz e qual é o seu propósito.
+
+### Demonstração: 
+
+A demonstração pode ser verificada no vídeo abaixo:  
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BLZi2s0_BUQ?si=HXYYzJdJZpabjSZm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

@@ -3,31 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"math/rand"
 	"testing"
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
-
-func connectHandler(client mqtt.Client) {
-	fmt.Println("Connected")
-}
-
-func connectLostHandler(client mqtt.Client, err error) {
-	fmt.Printf("Connection lost: %v", err)
-}
-
-func GenerateData() map[string]int {
-	data := map[string]int{
-		"CO2":   rand.Intn(100),
-		"CO":    rand.Intn(1000),
-		"NO2":   rand.Intn(500),
-		"MP10":  rand.Intn(200),
-		"MP2,5": rand.Intn(200),
-	}
-	return data
-}
 
 // Teste de conexão com o broker MQTT
 func TestConnectToMQTTBroker(t *testing.T) {
