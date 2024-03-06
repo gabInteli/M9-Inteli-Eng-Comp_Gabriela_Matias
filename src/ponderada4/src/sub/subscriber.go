@@ -2,19 +2,31 @@ package main
 
 import (
 	"fmt"
-	MQTT "github.com/eclipse/paho.mqtt.golang"
+	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
-var messagePubHandler MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
-	fmt.Printf("Received: %s from: %s\n", msg.Payload(), msg.Topic())
+var connectHandler mqtt.OnConnectHandler = func(client mqtt.Client) {
+	fmt.Println("Connected")
+}
+
+var connectLostHandler mqtt.ConnectionLostHandler = func(client mqtt.Client, err error) {
+	fmt.Printf("Connection lost: %v", err)
 }
 
 func main() {
-	opts := MQTT.NewClientOptions().AddBroker("tcp://localhost:1883")
-	opts.SetClientID("subscriber")
-	opts.SetDefaultPublishHandler(messagePubHandler)
+	var broker = "bfd140d734d648f8858f07890dde8ff0.s1.eu.hivemq.cloud" // Endereço do broker HiveMQ na nuvem
+	var port = 8883                                                    // Porta padrão para conexões não seguras
 
-	client := MQTT.NewClient(opts)
+	opts := mqtt.NewClientOptions()
+	opts.AddBroker(fmt.Sprintf("tls://%s:%d/mqtt", broker, port))
+	opts.SetClientID("Subscriber")
+	opts.SetUsername("admin")
+	opts.SetPassword("Admin123")
+	opts.OnConnect = connectHandler
+	opts.OnConnectionLost = connectLostHandler
+
+
+	client := mqtt.NewClient(opts)
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
 		panic(token.Error())
 	}
@@ -24,5 +36,8 @@ func main() {
 		return
 	}
 
-	select {}
+	fmt.Println("Subscriber está rodando. Pressione CTRL+C para sair.")
+	select {} // Bloqueia indefinidamente
+	
+
 }

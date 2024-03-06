@@ -4,16 +4,45 @@ import (
 	"encoding/json"
 	"testing"
 	"time"
+	"fmt"
 
-	MQTT "github.com/eclipse/paho.mqtt.golang"
+	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
+
+func connectHandler mqtt.OnConnectHandler = func(client mqtt.Client) {
+	fmt.Println("Connected")
+}
+
+func connectLostHandler mqtt.ConnectionLostHandler = func(client mqtt.Client, err error) {
+	fmt.Printf("Connection lost: %v", err)
+}
+
+
+func GenerateData() map[string]int {
+	data := map[string]int{
+		"CO2":   rand.Intn(100),
+		"CO":    rand.Intn(1000),
+		"NO2":   rand.Intn(500),
+		"MP10":  rand.Intn(200),
+		"MP2,5": rand.Intn(200),
+	}
+	return data
+}
 
 // Teste de conexão com o broker MQTT
 func TestConnectToMQTTBroker(t *testing.T) {
-	opts := MQTT.NewClientOptions().AddBroker("tcp://localhost:1883")
-	opts.SetClientID("test-client")
+	var broker = "bfd140d734d648f8858f07890dde8ff0.s1.eu.hivemq.cloud" // Endereço do broker HiveMQ na nuvem
+	var port = 8883                                                    // Porta padrão para conexões não seguras
 
-	client := MQTT.NewClient(opts)
+	opts := mqtt.NewClientOptions()
+	opts.AddBroker(fmt.Sprintf("tls://%s:%d/mqtt", broker, port))
+	opts.SetClientID("Publisher")
+	opts.SetUsername("admin")
+	opts.SetPassword("Admin123")
+	opts.OnConnect = connectHandler
+	opts.OnConnectionLost = connectLostHandler
+
+	client := mqtt.NewClient(opts)
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
 		t.Errorf("Falha ao conectar ao broker MQTT: %v", token.Error())
 	} else {
@@ -38,10 +67,18 @@ func TestGenerateData(t *testing.T) {
 
 // Teste de confirmação de recebimento das publicações
 func TestPublishAndReceiveMessages(t *testing.T) {
-	opts := MQTT.NewClientOptions().AddBroker("tcp://localhost:1883")
-	opts.SetClientID("test-client")
+	var broker = "bfd140d734d648f8858f07890dde8ff0.s1.eu.hivemq.cloud" // Endereço do broker HiveMQ na nuvem
+	var port = 8883                                                    // Porta padrão para conexões não seguras
 
-	client := MQTT.NewClient(opts)
+	opts := mqtt.NewClientOptions()
+	opts.AddBroker(fmt.Sprintf("tls://%s:%d/mqtt", broker, port))
+	opts.SetClientID("Publisher")
+	opts.SetUsername("admin")
+	opts.SetPassword("Admin123")
+	opts.OnConnect = connectHandler
+	opts.OnConnectionLost = connectLostHandler
+
+	client := mqtt.NewClient(opts)
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
 		t.Fatalf("Falha ao conectar ao broker MQTT: %v", token.Error())
 	}
