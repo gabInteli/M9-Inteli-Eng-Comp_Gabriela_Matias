@@ -29,7 +29,6 @@ func GenerateData() map[string]int {
 	return data
 }
 
-
 func main() {
 	err := godotenv.Load(".env")
 	if err != nil {

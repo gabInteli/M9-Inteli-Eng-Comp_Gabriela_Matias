@@ -2,79 +2,65 @@
 sidebar_position: 1
 ---
 
-# Simulação de ataques usando MQTT
+# Simulador IoT - Broker em Cloud
 
 ## Simulação de Envio e Captação de Dados de Sensores
-Subir um broker remoto e um broker local do MQTT para conduzir cenários de análise de vulnerabilidade (dentro do CIA Triad), identificando situações onde pode ser comprometido cada um dos três pilares: Confiabilidade, Integridade e Disponibilidade.
+Criar um simulador de dispositivos IoT utilizando o protocolo MQTT através do uso da biblioteca Eclipse Paho. 
+Este projeto inclui uma estrutura de publisher e subscriber desenvolvida com Go, que publica mensagens JSON em um tópico MQTT e um que recebe, utilizando um broker hospedado em Cloud no HiveMQ. As mensagens contêm dados simulados de medições, respeitando especificações técnicas como faixa de medição e alcance espectral, alem disso para garantir uma variação de dados, os valores são aleatórios dentro de um intervalo estabelecido pelo código.
 
-## Objetivo 
-Introdução ao conceito de segurança da informação para ambientes IoT. Apresentação dos fundamentos de segurança como proteção de dados em trânsito e em armazenamento, autenticação e autorização da comunicação. Discussão sobre pertinência de cada uma das estratégias de proteção.
 
-## Desenvolvimento de Simulação
+### Repositório de Resolução do Projeto
 
-1. Seleção algum aplicativo de cliente MQTT.
+[✔] [Ponderada 4](https://github.com/gabInteli/M9-Inteli-Eng-Comp_Gabriela_Matias/tree/main/src/ponderada4)
 
-2. Seleção de um broker público.
+## Requisitos
+- Mosquitto
+- Paho MQTT
+- Python
+- Go
+- Cluster - HiveMQ  
 
-3. Faça a conexão com o broker e anote o ClientID utilizado.
+##  Modo de Execução 
 
-![Criação e Conexão de um Broker Público](../../../src/ponderada3/img/img1.png)
+### Instalando Dependências - Go Mod
+Acesse o diretório que contém as dependências necessárias para cada função: 
 
-### Pergunta 1: 
-O que acontece se você utilizar o mesmo ClientID em outra máquina ou sessão do browser? Algum pilar do CIA Triad é violado com isso?
+Para o publisher:
+```
+cd /src/ponderada4/src/pub
+go mod tidy
+```
 
-Se você usar o mesmo ClientID em outra máquina ou sessão do navegador, geralmente o broker MQTT substituirá a conexão anterior com o mesmo ClientID pela nova conexão. Isso ocorre porque o ClientID é uma identificação única para cada cliente MQTT e é usado pelo broker para identificar e rastrear os clientes conectados.
+Para o subscriber:
+```
+cd /src/ponderada4/src/sub
+go mod tidy
+```
 
-- Violação do Pilar da Integridade:
-O uso do mesmo ClientID em várias máquinas ou sessões pode resultar em conflitos e substituições de conexão no broker MQTT. Isso pode comprometer a integridade dos dados transmitidos, pois não há garantia de que todas as mensagens destinadas ao ClientID estejam sendo entregues ao cliente correto.
+### Executando o Publisher
 
-- Violação do Pilar da Disponibilidade:
-Além disso, o uso de ClientID duplicados pode afetar a disponibilidade do serviço MQTT, pois o broker pode ficar sobrecarregado com várias conexões tentando usar o mesmo identificador. Isso pode levar a interrupções no serviço para outros clientes legítimos que estão tentando se conectar ao broker.
+Para executar o script do publisher, navegue até o diretório onde o arquivo publisher.go e execute o arquivo.
+```
+cd /src/ponderada2/src/pub
+go run publisher.go
 
-4. Criação de um ambiente containerizado para rodar localmente uma versão do Mosquitto, é uma boa prática criar um contexto separado para analisar por vulnerabilidades em um sistema, também chamado de Sandbox.
+```
 
-5. Escolha uma pasta no seu OS e crie a pasta do container Mosquitto e dentro a sua pasta de config. 
+Isso iniciará o script que publicará mensagens JSON simuladas para o tópico MQTT no intervalo definido. 
+O script imprimirá no terminal cada mensagem que for publicada.
 
-6. Crie o arquivo config/mosquitto.conf com as infos necessárias.
+![Publisher](../../static/img/pub_pond4.png)
 
-7. Crie o arquivo config/pwfile e deixe ele em branco.
+### Executando o Subscriber
 
-8. Crie o arquivo docker-compose.yml na pasta raíz do contêiner.
+Para executar o script do subscriber, navegue até o diretório onde o arquivo subscriber.go e execute o arquivo: 
+```
+cd /src/ponderada2/src/pub
+go run subscriber.go
 
-9. Subindo o container: 
-![Criação de Container](../../../src/ponderada3/img/img2.png)
+```
 
-### Pergunta 2: 
-Com os parâmetros de resources, algum pilar do CIA Triad pode ser facilmente violado?
+Isso iniciará o script que receberá as mensagens JSON simuladas para o tópico MQTT no intervalo definido. O script imprimirá no terminal cada mensagem que for recebida.
 
-Sim, os parâmetros de resources em um arquivo de configuração do Docker Compose podem afetar o pilar de Disponibilidade da tríade CIA.
+![Subscriber](../../static/img/sub_pond4.png)
 
-A tríade CIA consiste em Confidencialidade, Integridade e Disponibilidade, e visa garantir que os dados e sistemas de informação sejam protegidos adequadamente. Vamos analisar como os parâmetros de resources podem impactar a Disponibilidade:
-
-Disponibilidade: Este pilar garante que os sistemas e dados estejam disponíveis quando necessário. Ao definir limites de recursos como CPU e memória para os contêineres Docker, você pode limitar a quantidade de recursos que eles podem utilizar. Se os limites forem definidos muito baixos, os contêineres podem ficar sem recursos e tornarem-se indisponíveis para atender às solicitações, resultando em tempo de inatividade. Por outro lado, se os limites forem definidos muito altos, outros contêineres ou aplicativos no host podem ser afetados devido à competição por recursos, também impactando a disponibilidade.
-
-10. Vamos verificar se o contêiner está rodando normalmente. 
-![Teste do Docker](../../../src/ponderada3/img/img3.png)
-
-11. Com o contêiner funcionando, vamos acessar a shell dele.
-
-12. Vamos fazer o Subscribe em um tópico (sem autenticação).
-![Subscribe](../../../src/ponderada3/img/img4.png)
-Ao acessar o tópico, o meu container sinaliza a entrada de um "new client" no terminal. 
-
-13. Abra outro terminal, entre no contêiner e vamos fazer o Publish.
-![Publish](../../../src/ponderada3/img/img5.png)
-
-### Pergunta 3: 
-Sem autenticação (repare que a variável allow_anonymous está como true), como a parte de confidencialidade pode ser violada?
-
-A falta de autenticação no MQTT pode comprometer a confidencialidade dos dados, permitindo acesso não autorizado e divulgação não intencional de informações sensíveis. É importante habilitar a autenticação e implementar medidas de segurança adequadas, como autenticação por usuário e senha, para proteger os dados transmitidos através do MQTT.
-
-14. Vamos implementar a camada de autenticação, começando por reabrir o arquivo config/mosquitto.conf e modificar a primeira linha, trocando a variável allow_anonymous para false.
-
-15. Dentro do contêiner (acesse a shell dele), vamos criar o usuário. 
-
-16. Reinicie o contêiner para refletir as novas configurações
-
-17. A partir de agora, as ações de Subscribe / Publish terão que passar por uma camada de autenticação para serem efetivadas
-![Pub/Sub - Auth](../../../src/ponderada3/img/img6.png)

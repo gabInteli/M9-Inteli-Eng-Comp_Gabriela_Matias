@@ -1,33 +1,15 @@
 ---
 sidebar_position: 1
 ---
----
-sidebar_position: 1
----
 
-# Simulador IoT - Desenvolvimento de Broker em Cloud
+# Simulador IoT - Desenvolvimento de Testes
 
 ## Simulação de Envio e Captação de Dados de Sensores
 Criar um simulador de dispositivos IoT utilizando o protocolo MQTT através do uso da biblioteca Eclipse Paho. 
-Este projeto inclui uma estrutura de publisher e subscriber desenvolvida com Go, que publica mensagens JSON em um tópico MQTT e um que recebe, utilizando o HiveMQ como broker. As mensagens contêm dados simulados de medições, respeitando especificações técnicas como faixa de medição e alcance espectral, além disso para garantir uma variação de dados, os valores são aleatórios dentro de um intervalo estabelecido pelo código.
+Este projeto inclui uma estrutura de publisher e subscriber desenvolvida com Go, que publica mensagens JSON em um tópico MQTT e um que recebe, utilizando o Mosquitto como broker. As mensagens contêm dados simulados de medições, respeitando especificações técnicas como faixa de medição e alcance espectral, alem disso para garantir uma variação de dados, os valores são aleatórios dentro de um intervalo estabelecido pelo código.
+
 
 ### Repositório de Resolução do Projeto
-
-[✔] [Ponderada 4](https://github.com/gabInteli/M9-Inteli-Eng-Comp_Gabriela_Matias/tree/main/src/ponderada4)
-
-## Requisitos
-- Mosquitto
-- Paho MQTT
-- Python
-- Cluster: HiveMQ
-- Go
-
-##  Modo de Execução 
-
-### Configuração do HiveMQ
-Você deve configurar o HiveMQ antes de iniciá-lo. Supondo que você tenha um arquivo de configuração chamado hivemq.conf, você pode iniciar o HiveMQ com a seguinte linha de comando:
-
-
 
 [✔] [Ponderada 2](https://github.com/gabInteli/M9-Inteli-Eng-Comp_Gabriela_Matias/tree/main/src/ponderada2)
 

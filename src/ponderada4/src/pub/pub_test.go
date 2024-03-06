@@ -2,21 +2,21 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"math/rand"
 	"testing"
 	"time"
-	"fmt"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
-func connectHandler mqtt.OnConnectHandler = func(client mqtt.Client) {
+func connectHandler(client mqtt.Client) {
 	fmt.Println("Connected")
 }
 
-func connectLostHandler mqtt.ConnectionLostHandler = func(client mqtt.Client, err error) {
+func connectLostHandler(client mqtt.Client, err error) {
 	fmt.Printf("Connection lost: %v", err)
 }
-
 
 func GenerateData() map[string]int {
 	data := map[string]int{
@@ -85,7 +85,7 @@ func TestPublishAndReceiveMessages(t *testing.T) {
 
 	// Inicia um subscriber MQTT para receber as publicações
 	received := make(chan bool)
-	token := client.Subscribe("/sensors", 0, func(client MQTT.Client, msg MQTT.Message) {
+	token := client.Subscribe("/sensors", 0, func(client mqtt.Client, msg mqtt.Message) {
 		// Verifique se a mensagem recebida é válida
 		var data map[string]int
 		if err := json.Unmarshal(msg.Payload(), &data); err != nil {
