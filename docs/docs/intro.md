@@ -14,7 +14,7 @@ Neste espaço, compartilho o meu aprendizado e desenvolvimento em temas como MQT
 ## Sobre o Repositório
 
 Este repositório foi criado para documentar e versionar projetos relacionados a atividades práticas, experimentos e estudos pessoais. 
-Cada uma tarefa desenvolvida para temas referentes ao módulo 8 de Engenharia da Computação, proporcionando uma visão organizada e acessível ao meu progresso e aprendizado.
+Cada uma tarefa desenvolvida para temas referentes ao módulo 9 de Engenharia da Computação, proporcionando uma visão organizada e acessível ao meu progresso e aprendizado.
 
 ## Como Utilizar Este Repositório
 
