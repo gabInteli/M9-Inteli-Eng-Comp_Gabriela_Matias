@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ## Simulação de Envio e Captação de Dados de Sensores
 Criar um simulador de dispositivos IoT utilizando o protocolo MQTT através do uso da biblioteca Eclipse Paho. 
-Este projeto inclui uma estrutura de publisher e subscriber desenvolvida com Go, que publica mensagens JSON em um tópico MQTT e um que recebe, utilizando um broker hospedado em Cloud no HiveMQ. As mensagens contêm dados simulados de medições, respeitando especificações técnicas como faixa de medição e alcance espectral, alem disso para garantir uma variação de dados, os valores são aleatórios dentro de um intervalo estabelecido pelo código.
+Este projeto inclui uma estrutura de publisher e subscriber desenvolvida com Go, que publica mensagens JSON em um tópico MQTT e um que recebe, utilizando um broker hospedado em Cloud no HiveMQ. As mensagens contêm dados simulados de medições, respeitando especificações técnicas como faixa de medição e alcance espectral, alem disso para garantir uma variação de dados, os valores são aleatórios dentro de um intervalo estabelecido pelo código. Além disso, os dados são enviados para um banco de dados local para alimentarem um dashboard de visualização de dados.
 
 
 ### Repositório de Resolução do Projeto
@@ -19,21 +19,14 @@ Este projeto inclui uma estrutura de publisher e subscriber desenvolvida com Go,
 - Python
 - Go
 - Cluster - HiveMQ  
+- Metabase
 
 ##  Modo de Execução 
 
 ### Instalando Dependências - Go Mod
 Acesse o diretório que contém as dependências necessárias para cada função: 
-
-Para o publisher:
 ```
-cd /src/ponderada4/src/pub
-go mod tidy
-```
-
-Para o subscriber:
-```
-cd /src/ponderada4/src/sub
+cd /src/ponderada5/src
 go mod tidy
 ```
 
@@ -48,21 +41,25 @@ go run publisher.go
 
 Isso iniciará o script que publicará mensagens JSON simuladas para o tópico MQTT no intervalo definido. 
 O script imprimirá no terminal cada mensagem que for publicada.
+![Publisher](../../static/img/pond5_pub.png)
 
-![Publisher](../../static/img/pub_pond4.png)
 
-### Executando o Subscriber
-
-Para executar o script do subscriber, navegue até o diretório onde o arquivo subscriber.go e execute o arquivo: 
+### Executando a API de Envio de Dados
+Para executar o o funcionamento da API que atua como Subscriber pra captar as informações do Publisher no Broker. 
 ```
-cd /src/ponderada2/src/pub
-go run subscriber.go
-
+cd /src/ponderada5/src/api
+go run main.go
 ```
+Isso iniciará o serviço que receberá as mensagens JSON simuladas para o tópico MQTT no intervalo definido e publicará as mensagens no banco de dados. 
+![API](../../static/img/pond5_api.png)
 
-Isso iniciará o script que receberá as mensagens JSON simuladas para o tópico MQTT no intervalo definido. O script imprimirá no terminal cada mensagem que for recebida.
+![Banco de Dados](../../static/img/pond5_db.png)
 
-![Subscriber](../../static/img/sub_pond4.png)
+### Visualização do Dashboard
+
+Foi construido um dashboard do Metabase integrando ao banco de Dados Postgres local. 
+![Metabase](../../static/img/pond5_metabase1.png)
+![Metabase](../../static/img/pond5_metabase2.png)
 
 ### Rodando os Testes
 
@@ -146,4 +143,4 @@ Para cada teste, são fornecidas explicações detalhadas sobre o que o teste fa
 ### Demonstração: 
 
 A demonstração pode ser verificada no vídeo abaixo:  
-<iframe width="560" height="315" src="https://www.youtube.com/embed/BLZi2s0_BUQ?si=HXYYzJdJZpabjSZm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zFYoQ6FOw6U?si=8m9LGWfUcieOxIt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
