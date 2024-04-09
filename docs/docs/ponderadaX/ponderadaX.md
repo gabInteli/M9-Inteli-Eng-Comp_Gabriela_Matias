@@ -25,23 +25,22 @@ sidebar_position: 1
 
 ### Criação de um Producer 
 1. Estrutura de Dados:
-![Data Struct](./static/datastructure.png)
+![Data Struct](../../static/img/datastructure.png)
 
 2. Criação de um Producer
-![Producer](./static/producer.png)
+![Producer](../../static/img/producer.png)
 
 ### Criação de um Consumer 
-![Consumer](./static/consumer.png)
+![Consumer](../../static/img/consumer.png)
 
 ### Armazenamento dos Dados
-![Kafka](./static/kafka.png)
+![Kafka](../../static/img/kafka.png)
 
 ### Implementação de Testes
 
 ##  Modo de Execução 
 
 ### Criando Clusters e Broker de Dependências - Go Mod
-
 
 ### Instalando Dependências
 Acesse o diretorio que contem as dependências necessárias.
@@ -53,7 +52,7 @@ go mod tidy
 ### Executando o Producer/Consumer
 
 A demonstração pode ser verificada no vídeo abaixo:  
-[Vídeo de Demonstração](https://www.youtube.com/watch?v=eT6XUvVzdfA)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eT6XUvVzdfA?si=nNfXNR7ATuIGX7Ij" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Obs.: Tive problemas com o teste final. Como apresentada a falha no vídeo. 
 
