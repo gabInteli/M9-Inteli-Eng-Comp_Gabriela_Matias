@@ -84,7 +84,7 @@ FAIL
 exit status 1
 FAIL    main.go 1.376s
 ```
-![Test](./static/test.png)
+![Test](../../static/img/test.png)
 
 
 ### Demonstração: 
