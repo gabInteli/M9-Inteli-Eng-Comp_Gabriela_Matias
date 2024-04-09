@@ -4,12 +4,8 @@ sidebar_position: 1
 
 # Criação e Integração de Cluster com Cloud - Kafka + HiveMQ 
 
-## Critérios de Conclusão
-
-1. Implementar um Producer (Produtor): Deve coletar dados simulados de sensores de qualidade do ar e publicá-los em um tópico do Kafka chamado sensor (**aqui eu não tinha notado o nome do topico e coloquei outro, perdão**). Os dados devem incluir:
-2. Id do sensor, timestamp, tipo de poluente e nivel da medida.
-3. Implementar um Consumer (Consumidor): Deve assinar o tópico qualidadeAr e processar os dados recebidos, exibindo-os em um formato legível, além de armazená-los para análise posterior (escolha a forma de armazenamento que achar mais adequada).
-4. Implementar testes de Integridade e Persistência: Criar testes automatizados que validem a integridade dos dados transmitidos (verificando se os dados recebidos são iguais aos enviados) e a persistência dos dados (assegurando que os dados continuem acessíveis para consulta futura, mesmo após terem sido consumidos).
+## Objetivo
+Nessa atividade, deve-se desenvonver a integração entre o cluster do HiveMQ e um provedor de Kafka em nuvem.
 
 ### Repositório de Resolução do Projeto
 
